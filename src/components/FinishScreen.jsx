@@ -1,5 +1,6 @@
-function FinishScreen({ points, totalPoints }) {
+function FinishScreen({ points, totalPoints, dispatch }) {
   const percentage = (points / totalPoints) * 100;
+
   let emoji;
   if (percentage === 100) emoji = '🎖️';
   if (percentage >= 80 < 100) emoji = '🥳';
@@ -8,10 +9,18 @@ function FinishScreen({ points, totalPoints }) {
   if (percentage === 0) emoji = '🤦';
 
   return (
-    <p className='result'>
-      {emoji} You scored <strong>{points}</strong> out of {totalPoints} (
-      {Math.ceil(percentage)}%)
-    </p>
+    <>
+      <p className='result'>
+        {emoji} You scored <strong>{points}</strong> out of {totalPoints} (
+        {Math.ceil(percentage)}%)
+      </p>
+      <button
+        className='btn btn-ui'
+        onClick={() => dispatch({ type: 'restart' })}
+      >
+        Restart
+      </button>
+    </>
   );
 }
 

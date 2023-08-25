@@ -10,10 +10,11 @@ import Progress from './components/Progress';
 import FinishScreen from './components/FinishScreen';
 import Footer from './components/Footer';
 import Timer from './components/Timer';
+import data from '../data/questions.json';
 
 const initialState = {
-  questions: [],
-  status: 'loading',
+  questions: data.questions,
+  status: 'ready',
   index: 0,
   answer: null,
   points: 0,
@@ -22,12 +23,12 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'dataReceived':
-      return {
-        ...state,
-        questions: action.payload,
-        status: 'ready',
-      };
+    // case 'dataReceived':
+    //   return {
+    //     ...state,
+    //     questions: action.payload,
+    //     status: 'ready',
+    //   };
     case 'dataFailed':
       return {
         ...state,
@@ -85,12 +86,12 @@ function App() {
   const numQuestions = questions.length;
   const totalPoints = questions.reduce((prev, cur) => prev + cur.points, 0);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/questions')
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: 'dataReceived', payload: data }))
-      .catch((err) => dispatch({ type: 'dataFailed' }));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:3000/questions')
+  //     .then((res) => res.json())
+  //     .then((data) => dispatch({ type: 'dataReceived', payload: data }))
+  //     .catch((err) => dispatch({ type: 'dataFailed' }));
+  // }, []);
 
   return (
     <div className='app'>
